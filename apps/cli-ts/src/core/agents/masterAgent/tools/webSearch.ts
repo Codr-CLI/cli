@@ -1,3 +1,4 @@
+/* temporarily unsupported due to rag dependency
 import { startLoader, stopLoader } from "@cli/ui/Loader/loaderManager";
 import { llm } from "@llm/llm";
 import { RagClient } from "@transport/zeromqClient";
@@ -59,3 +60,5 @@ Return your answer in markdown, and be direct.
 
 	return llmresponse;
 }
+
+*/

@@ -1,80 +1,87 @@
-import zmq from "zeromq";
+// Deprecated: RAG integration (ZeroMQ client)
+// This section is temporarily unsupported due to backend restructuring & RAG extraction.
+// Kept here for reference until new APIs / backend design are finalized.
 
-interface CallRAG {
-	path?: string;
-	query?: string;
-	type?: string;
-	session_id?: string;
-}
+// import zmq from "zeromq";
 
-const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+// interface CallRAG {
+// 	path?: string;
+// 	query?: string;
+// 	type?: string;
+// 	session_id?: string;
+// }
 
-const callRAG = async (data: CallRAG) => {
-	const socket = new zmq.Request();
+// const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-	try {
-		await socket.connect("tcp://127.0.0.1:5500");
+// const callRAG = async (data: CallRAG) => {
+// 	const socket = new zmq.Request();
 
-		await delay(100);
-		// data.type = 'check_collection'
-		const start = Date.now();
-		await socket.send(JSON.stringify(data));
+// 	try {
+// 		await socket.connect("tcp://127.0.0.1:5500");
 
-		const [result] = await socket.receive();
+// 		await delay(100);
+// 		// data.type = 'check_collection'
+// 		const start = Date.now();
+// 		await socket.send(JSON.stringify(data));
 
-		if (!result) {
-			throw new Error("No response received from ZeroMQ server.");
-		}
+// 		const [result] = await socket.receive();
 
-		const response = JSON.parse(result.toString());
+// 		if (!result) {
+// 			throw new Error("No response received from ZeroMQ server.");
+// 		}
 
-		return { success: true, response };
-	} catch (error) {
-		return { success: false, error };
-	} finally {
-		await delay(50);
-		await socket.close();
-	}
-};
+// 		const response = JSON.parse(result.toString());
 
-export default callRAG;
+// 		return { success: true, response };
+// 	} catch (error) {
+// 		return { success: false, error };
+// 	} finally {
+// 		await delay(50);
+// 		await socket.close();
+// 	}
+// };
 
-export class RagClient {
-	private endpoint: string;
+// export default callRAG;
 
-	constructor(endpoint = "tcp://127.0.0.1:5500") {
-		this.endpoint = endpoint;
-	}
+// export class RagClient {
+// 	private endpoint: string;
 
-	private async delay(ms: number) {
-		return new Promise((resolve) => setTimeout(resolve, ms));
-	}
+// 	constructor(endpoint = "tcp://127.0.0.1:5500") {
+// 		this.endpoint = endpoint;
+// 	}
 
-	async callRagOnce(payload: any) {
-		const socket = new zmq.Request();
+// 	private async delay(ms: number) {
+// 		return new Promise((resolve) => setTimeout(resolve, ms));
+// 	}
 
-		try {
-			await socket.connect(this.endpoint);
-			await this.delay(100); // Small delay to ensure socket is ready
+// 	async callRagOnce(payload: any) {
+// 		const socket = new zmq.Request();
 
-			await socket.send(JSON.stringify(payload));
+// 		try {
+// 			await socket.connect(this.endpoint);
+// 			await this.delay(100); // Small delay to ensure socket is ready
 
-			const [result] = await socket.receive();
-			if (!result) {
-				throw new Error("No response received from ZeroMQ server.");
-			}
+// 			await socket.send(JSON.stringify(payload));
 
-			const response = JSON.parse(result.toString());
-			return { success: true, response };
-		} catch (error) {
-			return { success: false, error };
-		} finally {
-			await this.delay(50); // Ensure response is fully handled
-			await socket.close();
-		}
-	}
-}
+// 			const [result] = await socket.receive();
+// 			if (!result) {
+// 				throw new Error("No response received from ZeroMQ server.");
+// 			}
 
+// 			const response = JSON.parse(result.toString());
+// 			return { success: true, response };
+// 		} catch (error) {
+// 			return { success: false, error };
+// 		} finally {
+// 			await this.delay(50); // Ensure response is fully handled
+// 			await socket.close();
+// 		}
+// 	}
+// }
+
+// Deprecated: Experimental Chat Summary
+// Was used for maintaining rolling chat context via RAG summarization.
+// Commented out until new summarization logic is implemented.
 // void (async () => {
 //     const { success, decision: newSummary } = await getSummarizeChat({
 //         chat: currentChat,

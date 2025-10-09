@@ -5,11 +5,11 @@ import { z } from "zod";
 // Tool implementations
 import { deleteCodeAtLines } from "./tools/deleteCode";
 import { editFileAtLine } from "./tools/editCode";
-import generateCodebaseMetadata from "./tools/generateCodebaseMetadata";
+// import generateCodebaseMetadata from "./tools/generateCodebaseMetadata";
 import { getCallGraphContext } from "./tools/getCallGraphContext";
 import { getClassContext } from "./tools/getClassContext";
 import { getContext } from "./tools/getContext";
-import { getCodeContextByQuery } from "./tools/getContextByQuery";
+// import { getCodeContextByQuery } from "./tools/getContextByQuery";
 import { getFileContext } from "./tools/getFileContext";
 import { getFunctionContext } from "./tools/getFunctionContext";
 
@@ -85,16 +85,16 @@ const getCallGraphTool = tool(getCallGraphContext, {
 /**
  * Tool: Perform fuzzy or semantic search over the code metadata.
  */
-const getContextByQueryTool = tool(getCodeContextByQuery, {
-	name: "get_context_by_query",
-	description:
-		"Searches the static code metadata using natural language queries to retrieve relevant context (function, file, or class info).",
-	schema: z.object({
-		query: z
-			.string()
-			.describe("A natural language query describing what you're looking for."),
-	}),
-});
+// const getContextByQueryTool = tool(getCodeContextByQuery, {
+// 	name: "get_context_by_query",
+// 	description:
+// 		"Searches the static code metadata using natural language queries to retrieve relevant context (function, file, or class info).",
+// 	schema: z.object({
+// 		query: z
+// 			.string()
+// 			.describe("A natural language query describing what you're looking for."),
+// 	}),
+// });
 
 /**
  * Tool: Get function-level metadata by exact name.
@@ -141,12 +141,12 @@ const getFileContextTool = tool(getFileContext, {
 /**
  * Tool: Parse the codebase and generate static metadata (functions, classes, files, call graph).
  */
-const generateCodebaseMetadataTool = tool(generateCodebaseMetadata, {
-	name: "generate_codebase_metadata",
-	description:
-		"Analyzes the entire codebase and creates static metadata files for functions, classes, and call graphs. Stores results in `.metadata/` folder and optional vector store.",
-	schema: z.object({}),
-});
+// const generateCodebaseMetadataTool = tool(generateCodebaseMetadata, {
+// 	name: "generate_codebase_metadata",
+// 	description:
+// 		"Analyzes the entire codebase and creates static metadata files for functions, classes, and call graphs. Stores results in `.metadata/` folder and optional vector store.",
+// 	schema: z.object({}),
+// });
 
 // Register tools for use
 export const codeTools = [
@@ -154,11 +154,11 @@ export const codeTools = [
 	editCodeTool,
 	getContextTool,
 	getCallGraphTool,
-	getContextByQueryTool,
+	// getContextByQueryTool,
 	getFunctionContextTool,
 	getClassContextTool,
 	getFileContextTool,
-	generateCodebaseMetadataTool,
+	// generateCodebaseMetadataTool,
 ];
 
 export const codeToolsByName = Object.fromEntries(

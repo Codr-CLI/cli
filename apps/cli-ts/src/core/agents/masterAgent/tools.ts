@@ -6,7 +6,7 @@ import { fileTools } from "../fileAgent/fileTools";
 import { confirmAction } from "./tools/confirmAction";
 import goalPlanner from "./tools/goalPlanner";
 import runCommand from "./tools/runCliCommand";
-import { webSearch } from "./tools/webSearch";
+// import { webSearch } from "./tools/webSearch";
 
 const cliCommand = tool(runCommand, {
 	name: "run_cli-command",
@@ -45,22 +45,23 @@ const executionGoalPlanner = tool(goalPlanner, {
 	}),
 });
 
-const searchOnWeb = tool(webSearch, {
-	name: "web_search",
-	description:
-		"Searches the web for up-to-date information relevant to a user query. Useful when additional context, tutorials, latest documentation, or troubleshooting solutions are needed.",
-	schema: z.object({
-		query: z
-			.string()
-			.describe(
-				"The natural language proper descriptive search string the user would type into a search engine.",
-			),
-	}),
-});
+// temporarily unsupported due to rag dependency
+// const searchOnWeb = tool(webSearch, {
+// 	name: "web_search",
+// 	description:
+// 		"Searches the web for up-to-date information relevant to a user query. Useful when additional context, tutorials, latest documentation, or troubleshooting solutions are needed.",
+// 	schema: z.object({
+// 		query: z
+// 			.string()
+// 			.describe(
+// 				"The natural language proper descriptive search string the user would type into a search engine.",
+// 			),
+// 	}),
+// });
 
 export const tools = [
 	executionGoalPlanner,
-	searchOnWeb,
+	// searchOnWeb,
 	getFeedback,
 	cliCommand,
 	...fileTools,
