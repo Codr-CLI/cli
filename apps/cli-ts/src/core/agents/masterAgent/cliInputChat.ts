@@ -2,7 +2,6 @@ import { HumanMessage } from "@langchain/core/messages";
 import chalk from "chalk";
 import readline from "readline";
 
-// Minimal color scheme
 const userPrefix = chalk.bold.blue("> You:");
 const assistantPrefix = chalk.bold.green("> Assistant:");
 const promptSymbol = chalk.gray("›");
