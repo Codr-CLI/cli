@@ -1,4 +1,3 @@
-// import { ensureRagServerRunning } from "@utils/ensureRagServer";
 import chalk from "chalk";
 import { program } from "commander";
 import dotenv from "dotenv";
@@ -85,102 +84,6 @@ program
 			systemPrompt: CREATE_SYSTEM_PROMPT,
 		});
 	});
-
-// Deprecated: Document query command
-// This section is temporarily unsupported due to code restructuring & RAG extraction.
-// Keeping here for reference until the new RAG backend integration is stable.
-// Document query (RAG)
-// program
-// 	.command("doc")
-// 	.description("Query a document (PDF, DOCX, TXT, CSV, MD) using RAG")
-// 	.requiredOption("-p, --path <path>")
-// 	.requiredOption("-q, --query <query>")
-// 	.option("--chat", "Open persistent chat UI")
-// 	.action(async (opts) => {
-// 		const ok = await ensureRagServerRunning();
-// 		if (!ok) {
-// 			return process.exit(1);
-// 		}
-
-// 		if (opts.chat) {
-// 			const { chatWithContext } = await import("./commands/chat");
-// 			await chatWithContext({
-// 				path: opts.path,
-// 				query: opts.query,
-// 				type: "doc",
-// 			});
-// 		} else {
-// 			const { queryWebsite } = await import(
-// 				"@core/tools/documents/queryAnswer"
-// 			);
-// 			await queryWebsite({ path: opts.path, query: opts.query, type: "doc" });
-// 		}
-// 	});
-
-// Deprecated: Webpage query command
-// This section is temporarily unsupported due to code restructuring & RAG extraction.
-// Will be reintroduced once new RAG backend APIs are finalized.
-// Webpage content query (same as doc but from HTML)
-// program
-// 	.command("webpage")
-// 	.description("Analyze and extract info from a webpage HTML file")
-// 	.requiredOption("-p, --path <path>")
-// 	.requiredOption("-q, --query <query>")
-// 	.option("--chat", "Open persistent chat UI")
-// 	.action(async (opts) => {
-// 		const ok = await ensureRagServerRunning();
-// 		if (!ok) {
-// 			return process.exit(1);
-// 		}
-
-// 		if (opts.chat) {
-// 			const { chatWithContext } = await import("./commands/chat");
-// 			await chatWithContext({
-// 				path: opts.path,
-// 				query: opts.query,
-// 				type: "webpage",
-// 			});
-// 		} else {
-// 			const { queryWebsite } = await import(
-// 				"@core/tools/documents/queryAnswer"
-// 			);
-// 			await queryWebsite({
-// 				path: opts.path,
-// 				query: opts.query,
-// 				type: "webpage",
-// 			});
-// 		}
-// 	});
-
-// Active: Codebase analysis command
-// This is still supported and functional (JS, TS, Python)
-// program
-// 	.command("codebase")
-// 	.description("Ask questions about a local JS/TS/Python codebase")
-// 	.requiredOption("-p, --path <path>")
-// 	.requiredOption("-q, --query <query>")
-// 	.option("--chat", "Open persistent chat UI")
-// 	.action(async (opts) => {
-// 		// const ok = await ensureRagServerRunning();
-// 		// if (!ok) {
-// 		// 	return process.exit(1);
-// 		// }
-// 		if (opts.chat) {
-// 			const { chatWithContext } = await import("./commands/chat");
-// 			await chatWithContext({
-// 				path: opts.path,
-// 				query: opts.query,
-// 				type: "codebase",
-// 			});
-// 		} else {
-// 			const { indexCodebase } = await import("@core/tools/code/indexCodebase");
-// 			await indexCodebase({
-// 				path: opts.path,
-// 				query: opts.query,
-// 				type: "codebase",
-// 			});
-// 		}
-// 	});
 
 // Start the CLI
 await program.parseAsync();
